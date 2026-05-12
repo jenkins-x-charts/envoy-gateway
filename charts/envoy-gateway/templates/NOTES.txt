@@ -1,0 +1,23 @@
+envoy-gateway has been installed.
+
+Resources installed in namespace "{{ .Release.Namespace }}":
+{{- if .Values.envoyGateway.gatewayClass.create }}
+  - GatewayClass    {{ .Values.envoyGateway.gatewayClass.name }}    (cluster-scoped)
+{{- end }}
+  - Gateway         {{ .Release.Name }}
+  - EnvoyProxy      {{ .Release.Name }}-proxy
+{{- if .Values.envoyGateway.gateway.httpsRedirect }}
+  - HTTPRoute       {{ .Release.Name }}-http-redirect    (HTTP -> HTTPS 301)
+{{- end }}
+
+NOTE: this chart does not install the Envoy Gateway controller itself.
+It assumes the upstream `envoyproxy/gateway-helm` chart is already running on the cluster.
+
+Useful commands:
+
+  kubectl get gateway -n {{ .Release.Namespace }} {{ .Release.Name }}
+  kubectl get envoyproxy -n {{ .Release.Namespace }} {{ .Release.Name }}-proxy
+  kubectl get gatewayclass {{ .Values.envoyGateway.gatewayClass.name }}
+
+The Gateway is ready when its `Programmed` condition is `True` and an external
+address has been assigned to the underlying Service.

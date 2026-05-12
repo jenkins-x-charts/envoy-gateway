@@ -1,0 +1,16 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "envoy-gateway.labels" . | nindent 4 }}
+spec:
+  gatewayClassName: {{ .Values.envoyGateway.gatewayClass.name }}
+  infrastructure:
+    parametersRef:
+      group: gateway.envoyproxy.io
+      kind: EnvoyProxy
+      name: {{ .Release.Name }}-proxy
+  listeners:
+    {{- toYaml .Values.envoyGateway.gateway.listeners | nindent 4 }}
