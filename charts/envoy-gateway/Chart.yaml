@@ -1,0 +1,16 @@
+apiVersion: v2
+name: envoy-gateway
+description: A Helm chart to install Envoyproxy Gateway API networking components
+version: 0.0.1-SNAPSHOT
+appVersion: "0.0.1"
+kubeVersion: ">=1.33.0-0"
+icon: https://jayex.io/images/logo/jenkinsx-icon-color.svg
+home: https://github.com/jenkins-x-charts/envoy-gateway
+sources:
+  - https://github.com/jenkins-x-charts/envoy-gateway
+keywords:
+  - jenkins-x
+  - jayex
+  - envoy
+  - gateway-api
+  - ingress
