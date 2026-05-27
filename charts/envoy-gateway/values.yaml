@@ -4,7 +4,6 @@ envoyGateway:
     create: true
     name: envoy-gatewayclass
     controllerName: gateway.envoyproxy.io/gatewayclass-controller
-
   gateway:
     # Pass-through list of Gateway API listener specs.
     # For more details, see: https://gateway-api.sigs.k8s.io/reference/api-spec/main/spec/#listener
@@ -20,10 +19,12 @@ envoyGateway:
     # Listener sections to add HTTP -> HTTPS redirect.
     # Will silently fail if the listener name doesn't exist or isn't HTTP.
     httpsRedirect: []
-
   envoyProxy:
     service:
       type: LoadBalancer
       annotations: {}
     replicas: 1
     resources: {}
+image:
+  repository: ghcr.io/jenkins-x/envoy-gateway
+  tag: 0.1.0
